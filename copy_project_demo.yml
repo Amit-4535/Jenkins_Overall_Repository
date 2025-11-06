@@ -1,0 +1,35 @@
+
+
+
+Copy_Project_Demo
+
+
+copy project basically we are doing for -- copying the existing project into our new project..
+
+🔁 What is the "Copy existing project" option?
+This feature allows you to create a new Jenkins job by cloning an existing one. It copies:
+✅ Job configuration
+✅ Build triggers
+✅ Build steps
+✅ Post-build actions
+
+
+this is very useful when -- you want to reuse the same logic for similar projects (e.g., same build steps with a different repo or branch).
+
+
+job configurations --
+
+- select new item
+- name to the project like copy_project
+- and on bottom of the page we have option -- copy from -- so select job name, from which you want to copy the project.
+- click okay
+
+
+- now when you are opening this job -- you can see that whatever configuration we have did in the past/previous projects that all are come here.
+
+  this project will bring exact below values..
+  ✅ Job configuration
+  ✅ Build triggers
+  ✅ Build steps
+  ✅ Post-build actions
+
