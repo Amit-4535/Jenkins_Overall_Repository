@@ -26,3 +26,11 @@ Firdt job demo
  echo "let us create this first job file on instance" > first_demo_job.yml
 
  mkdir -p my_first_folder
+
+
+
+
+ when you create the job - on server /var/lib/jenkins/workspace -- you can see the build is completed here as this is the default directory or the default location
+ whatever name we are giving to the project -- with that name the job will created here.
+
+ you can see the detailed console output on the jenkins page.
