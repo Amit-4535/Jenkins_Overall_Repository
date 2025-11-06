@@ -1,0 +1,28 @@
+
+
+
+Firdt job demo
+
+
+
+- go to jenkins dashboard
+- select create new job
+- enter the job name
+- select freestyle/pipeline/multiconfiguration project/folder/multibranch pipeline or organized folder
+- click okay
+
+
+
+- select job and configure the job
+- enter discription for the job
+- go to execute shell
+  and paste the below script to create the file and the folder on the server
+
+
+  script-
+
+  echo "Hello from the first job"
+
+ echo "let us create this first job file on instance" > first_demo_job.yml
+
+ mkdir -p my_first_folder
