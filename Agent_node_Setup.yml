@@ -1,0 +1,93 @@
+
+
+Agent Node Setup
+
+we are also called this setup as master slave architecture.. we are creating this setup for distributing the task of the master node and can run the jobs on to the managed nodes.
+
+why we are running the jobs on the managed node??  Reason is --
+Jenkins application is running on master machine, so we are keeping this server securely.. (running multiple jobs on master node will make the maximum chances to this system is idel, might be crashed or might be go down)
+so avoiding this failure of the system and maintaining our Jenkins server is safe. that is why we are doing the master slave architecture..
+
+
+for this setup basically we required 2 machines.
+master &&
+Agent node
+
+
+On Jenkins master install the below mandatory tools..
+-	Java version 17 and
+-	Jenkins
+
+
+managed nodes --
+
+just install the java tool 
+no need to install the jenkins on this machine.
+
+
+
+setup --
+
+1) on master node go to the ~/.ssh folder and create the ssh key by the command 
+ssh-keygen
+
+(id_rsa and id_rsa.pub will be created)
+
+-	id_ed25519  		this is your private key and this will be available in Jenkins server
+-	id_ed25519.pub          this will be your public key this we need to copy to the node machine..
+
+
+2) now move that id_rsa.pub file to the agent node.
+go to the ~/.ssh folder and open the authorized_key file here, at the last line copy paste your id_rsa.pub file's content here.
+
+
+3) after copying the key -- check we are able to connect with the managed node or not? by the command
+ssh root@private_ip_of_managed_node
+
+(you can see that we are able to connect with the agent slave -- that means the setup is completed) through the command line..
+
+
+for jenkins application side, do this configuration to add the agent
+
+- go to jenkins
+- go to managed jenkins
+- select nodes option
+- select add new node
+
+ - name to that node like agent1
+ - select option -- permanant agent
+ - add discription if required
+ - select number of executors =1/2
+   (number of executors means how many jobs can be run on single time)
+
+ - select remote root directory -- basically setting up the workspace (like /home/ubuntu)
+ - enter the label name --> like agent1
+ 
+
+ - select usage -- select use this agent as much as possible
+ - launch method -- launch agent via ssh
+ - mention host -- enter agent1 public ip here
+ 
+
+
+ - add Credentials
+   select add credentials
+ - select jenkins
+ - in kind -- select ssh username with private key
+ - enter scope as -- global (Jenkins, node, items, all child items, etc)
+ - mention id -- like root
+ - username -- like root
+ - enter private key -- copy your master node id_rsa file as it is and paste it here
+ - and then click on save
+
+
+ - select host key verification strategy -- non verifying verification strategy
+ - availability -- keep this agent online as much as possible
+ - click on save or add
+
+
+ - now you can see agent node is added successfully, currently it is showing offline, do refresh, it will become an online.
+  now you can start to allocate or run the task on this agent1 or the worker node.
+
+
+
