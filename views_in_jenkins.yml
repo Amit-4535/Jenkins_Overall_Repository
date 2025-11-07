@@ -36,18 +36,14 @@ Configurations 
 
 
 
-Demo lab 2  creating pipeline view
+Demo lab 2  creating pipeline view (this option is basically for the pipeline projects not for the freestyle projects.)
 
--	First install the plugin build pipeline view  go to manage Jenkins  manage plugin  available section and search for  build pipeline (plugin)  install it..
--	Now go to my view  select on + icon  you will see the new option as build pipeline view  give view name as mypipelineview  select your initial job  which is build job  Number of builds to display: 5 (optional) (you can mention any number here)  click okay
--	Now trigger the build-job manually → Watch the full pipeline flow live 💥
-
-Note  you can see first starting the build-job then test-job then it will start the deploy-job..
+-	First install the plugin build pipeline view  go to manage Jenkins  manage plugin  available section and search for  pipeline view (plugin)  install it..
+-	if you create the pipeline job and added the different steps in it, then you will be able to see the different stages through the view.
 
 
 
-
-Demo 3  delivery pipeline view
+Demo 3  delivery pipeline view (this is baasically for the upstream and the downstream projects -- to check the stage views)
 
 -	Install delivery pipeline plugin first
 -	Make sure that your all the jobs are available like build-job, test-job and the deploy-job
