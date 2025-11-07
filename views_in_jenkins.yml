@@ -1,0 +1,58 @@
+
+
+ View in Jenkins  list view/my view / delivery pipeline view / and build pipeline view
+
+ Views in Jenkins help you organize and group jobs together, so you don’t have to see all jobs on a single cluttered dashboard.
+
+
+ There are different types of views depending on your goals:
+•	Simple List View
+•	My Views
+•	Build Pipeline View
+•	Delivery Pipeline View
+•	Nested Views (folders)
+•	Dashboard View (with plugins)
+
+
+
+
+🎯 Why Use Views?
+✅ For teams or large Jenkins instances:
+•	Separate projects by team or function (e.g., Dev, QA, Infra)
+
+
+1. ✅ List View (Default & Custom)   this is the default view.  Default Jenkins view shows all jobs
+
+Configurations 
+
+- first go to the my view
+-	Then you will see that + icon is there
+-	Enter view name
+-	3 types are there  include global view / list view and / my view is there
+-	This lab I am using name as myview  then select the option as list view and then  create the view..
+-	Here you can add the description
+-	Select your jobs here
+-	Save and apply..
+
+
+
+Demo lab 2  creating pipeline view
+
+-	First install the plugin build pipeline view  go to manage Jenkins  manage plugin  available section and search for  build pipeline (plugin)  install it..
+-	Now go to my view  select on + icon  you will see the new option as build pipeline view  give view name as mypipelineview  select your initial job  which is build job  Number of builds to display: 5 (optional) (you can mention any number here)  click okay
+-	Now trigger the build-job manually → Watch the full pipeline flow live 💥
+
+Note  you can see first starting the build-job then test-job then it will start the deploy-job..
+
+
+
+
+Demo 3  delivery pipeline view
+
+-	Install delivery pipeline plugin first
+-	Make sure that your all the jobs are available like build-job, test-job and the deploy-job
+-	Now create delivery pipeline view now  click on + button  select delivery pipeline view  name to that view  select okay and now do the configurations  choose component specifications choose job and  add your build job  set max number of builds: 5  save the configurations..
+-	Now click on Click the Trigger (play) button next to build-job
+-	You will see the pipeline stages here..
+
+
