@@ -1,0 +1,32 @@
+
+
+
+
+GitHub Project
+
+
+The github project will helpful for you to get the code from the github and start or create the build by pulling the files from the github..
+
+
+Configuration -
+
+- go to the jenkins dashboard
+- create a new job
+- name to the job -- github_project
+-  save or okay
+
+
+
+- configure your job
+- enter discription for the job
+- In source code management -- select option as Git
+- enter the repository url (Jenkins will pull the code from this repository location)
+- in branch -- mention your branch -- from which branch you want to get the code.
+- you can add build step if neccessary (optional)
+- click save and apply
+
+
+
+  when you build the job -- jenkins will pull the changes from the reposirtory and started the build, and the changes will be available in the Jenkins servers.
+
+
