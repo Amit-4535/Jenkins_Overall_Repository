@@ -8,6 +8,8 @@ The main purpose of this concept is we can decide how many jobs can be run on a 
 This setting is for only freestyle job and not applied for the pipeline jobs..
 ( This is a setting in Jenkins Freestyle Jobs (not pipelines) that allows multiple builds of the same job to run in parallel — instead of queuing up one by one.)
 
+When this option is checked, multiple builds of this project may be executed in parallel.
+
 
 This multiple builds will be running on single node or also the multiple nodes..
 depending on the scenarios..... If one agent is free  then multiple builds can run on single node.... If multiple agent is free  then also multiple builds can run on multiple nodes.
@@ -63,3 +65,26 @@ You should enable this if:
 •	Jobs are working on different Git branches or test environments.
 •	You want to speed up build processing and avoid queue delays.
 
+
+for demo purpose the project are as below.
+
+first job.
+enable the option -- concurrent build if neccessary
+and add the below script in the execute shell command.
+
+#!/bin/bash
+echo "Running test for build $BUILD_NUMBER"
+sleep 30
+echo "Build $BUILD_NUMBER completed"
+
+
+now build this job -- this will take the longer time
+
+
+meanwhie create the another job 
+and mention the execute shell and can add the below script
+echo "the example of the concurrent build job"
+echo "the build is running very smootly" > concurent.txt
+
+
+what happen -- you can see both the jobs can run parallally at a single time.. this is the use case of the concurrent build if neccessary
