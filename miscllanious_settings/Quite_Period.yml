@@ -1,0 +1,61 @@
+
+
+Quite Period
+
+🧩 What Is the "Quiet Period" in Jenkins?
+
+The Quiet Period is the amount of time (in seconds) Jenkins waits after a job is triggered before actually starting the build.
+
+In simple term   When this option is non-zero, newly triggered builds of this project will be added to the queue, but Jenkins will wait for the specified period of time (in seconds) before actually starting the build.
+
+
+
+example --
+
+if your builds take a long time to execute, you may want to prevent multiple source control commits that are made at approximately the same time from triggering multiple builds. Enabling the quiet period would prevent a build from being started as soon as Jenkins discovers the first commit; this would give the developer the chance to push more commits which would be included in the build when it starts. This reduces the size of the queue, meaning that developers would get feedback faster for their series of commits, and the load on the Jenkins system would be reduced.
+
+
+If a new build of this project is triggered while a build is already sitting in the queue, waiting for its quiet period to end, the quiet period will not be reset. The newly triggered build will not be added to the queue, unless this project is parameterized and the build has different parameters than the build already in the queue.
+
+
+🕰️ Why Is Quiet Period Used?
+Here are common use cases:
+
+
+  💡 Purpose    	🔍 Description
+Batching Changes	If many commits come in quickly, Jenkins will wait and combine them into one build instead of starting multiple builds.
+Stabilization Time	Gives time for resources (e.g., files, services, workspace) to settle down before running a build.
+Avoid Duplicate Jobs	Useful when GitHub/Webhooks trigger builds frequently.
+
+
+Configurations --
+
+manage Jenkins  system or (configure system)  come to quite period option and mention time : 5 (default is 5)
+
+Note configuration job  we can do this setting on our job as well  open your job  go to configure  come to quite period option  mention the time in second  save and apply..
+
+
+🛠️ Example:
+If quiet period is set to 10 seconds:
+•	Jenkins receives a trigger (e.g., commit, webhook).
+•	Waits 10 seconds before starting the build.
+•	If another trigger comes during this time → Jenkins resets the countdown.
+
+
+📌 Default Value:
+By default, Jenkins has a 5-second quiet period.
+
+
+A delay (in seconds) that Jenkins waits after a build is triggered, before actually starting it.
+The main reason:
+👉 To wait for a short time in case more commits (or triggers) arrive, so they can be batched into the same build instead of starting separate builds for each commit.
+✅ Example:
+•	Quiet Period: 30 seconds
+•	A commit is pushed → Jenkins is triggered.
+•	Jenkins waits 30 seconds before starting the build.
+•	If another commit is pushed during this 30-second window → Jenkins includes it in the same build run.
+•	After the quiet period ends → the build starts.
+If no further commits arrive during that time, Jenkins just builds the initially triggered change.
+
+
+
