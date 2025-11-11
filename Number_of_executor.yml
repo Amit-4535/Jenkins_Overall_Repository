@@ -1,0 +1,42 @@
+
+
+Number of Executor
+
+
+✅ What Is “Number of Executors” in Jenkins?
+The "Number of Executors" in Jenkins refers to how many jobs can run in parallel at a time on a given node (master or agent) — including the Jenkins controller node.
+
+
+📌 Where You See This Setting:
+•	Go to Manage Jenkins → system → # of executors: [ 2 ]    save and apply..
+
+
+💡 Example:
+If a node has:
+Number of Executors = 2
+➡️ That means this node can run 2 Jenkins jobs at the same time.
+If 3 jobs are triggered at once:
+•	2 will run immediately (in parallel),
+•	1 will stay in the queue until one executor becomes free.
+
+
+🧠 Why Executors Are Important?
+🔍 Purpose	          ✅ Benefit
+Enable parallel builds	  Faster CI/CD pipelines
+Optimize resource usage	  Better CPU/RAM utilization
+Prevent overload	  Avoids running too many heavy jobs on one machine
+
+
+⚠️ Important Notes:
+•	Setting too many executors can overload the machine (especially the controller).
+•	On Jenkins controller, it is recommended to keep executors = 0, and run jobs on agents.
+
+
+•	🧠 Best Practice Recommendations:
+Node Type               	Recommended Executors
+Jenkins Controller	        0 or 1 (if you must)
+Jenkins Agent (4 CPU cores)	2 to 4
+Jenkins Agent (8 CPU cores)	4 to 6
+
+
+
