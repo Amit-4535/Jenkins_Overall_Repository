@@ -1,0 +1,41 @@
+
+
+
+SCM checkout retry count
+
+
+🔁 What Is SCM Checkout Retry Count in Jenkins?
+SCM Checkout Retry Count defines the number of times Jenkins should retry checking out the source code if the first attempt fails (due to network errors, GitHub being down temporarily, etc.).
+
+
+Job Configurations
+
+- slect your job and go to the configure option
+- select option -- retry count
+- mention the numbers like -- 0/1/2
+- and save the configurations
+
+
+	You can apply this changes to the configure system as well  move to the dashboard  manage Jenkins  system   go for the scm checkout retry count  and mention 0/1/2 etc..
+
+
+🧠 Why It Matters:
+🔧 Use Case	        💬 Description
+Unstable network	Retry automatically if the Git checkout fails due to connectivity.
+Remote SCM issues	GitHub/GitLab might have temporary hiccups.
+Avoid job failure	Prevents failing the entire job just because of a one-time checkout error.
+
+
+🛠️ Example:
+If SCM Checkout Retry Count = 2:
+•	Jenkins tries to checkout source code.
+•	If it fails, Jenkins retries 2 more times (total 3 attempts: 1 original + 2 retries).
+•	If it still fails after retries, the job fails.
+
+
+✅ Best Practice:
+•	Keep it set between 1 to 3, depending on your network reliability.
+•	Don’t set it too high unless you’re sure of frequent transient issues.
+
+
+
