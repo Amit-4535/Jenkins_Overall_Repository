@@ -58,4 +58,9 @@ The main reason:
 If no further commits arrive during that time, Jenkins just builds the initially triggered change.
 
 
+example --
 
+create the job and configure it -- enable the github webhook trigger option -- in source code management -- mention your repository url and in quite perion mention the 180 second something.. now do changes on your repository and push the changes -- you can see now jenkins is queued the job --> but it will not execute until it is not finishing the 180 seconds, do one thing now -- add some another files or the commits, and push that changes as well to the repository.. 
+now once the 180 second is over --> initially you have triggered the pipeline for particular build and if you see the console output you can see the newly commit is added there.. that means jenkins integrated that newly added commit here, in the current build..
+
+this is how we are using the quite period concept in the jenkins..
