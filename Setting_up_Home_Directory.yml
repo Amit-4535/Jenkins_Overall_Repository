@@ -1,0 +1,29 @@
+
+
+Setting up an home directory
+
+
+The Jenkins Home Directory is where Jenkins stores everything it needs to function properly..
+
+By default, Jenkins stores all of its data in this directory on the file system
+/var/lib/Jenkins         systems default home directory..
+
+
+Note  you can set an your custom workspace as well..
+
+Steps to configure the custom home directory 
+
+🧭 Steps:
+1.	Open the job from the dashboard.
+2.	Click "Configure".
+3.	Scroll to the "Advanced Project Options" section.
+4.	Click on "Advanced...".
+5.	Check the box: ✅ "Use custom workspace"
+
+
+  6.	Provide your desired path. For example:
+/opt/custom_workspace/my-job
+💡 This is useful when you want job-specific data to be stored elsewhere than /var/lib/jenkins/workspace.
+
+
+
