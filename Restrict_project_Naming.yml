@@ -48,3 +48,5 @@ i want to start every job with test name then the expression should be as below
 
 like wise you can create the restrict project naming here in the jenkins..
 
+
+note -- if you tried to give the another name except than the pattern -- then this will give you the error, or it will not allowd you to create the job with another name..
