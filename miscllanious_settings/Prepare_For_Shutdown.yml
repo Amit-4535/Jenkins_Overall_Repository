@@ -1,0 +1,31 @@
+
+
+
+Prepare for shutdown
+
+
+🔍 What it Does:
+  •	It prevents any new builds from starting.
+•	Currently running builds will continue until they finish.
+•	Useful for:
+o	Performing Jenkins upgrades or maintenance.
+o	Restarting or shutting down Jenkins safely.
+o	Debugging without interrupting active jobs.
+
+
+✅ Behavior After Enabling:
+•	Jenkins enters a “quiet mode.”
+•	UI shows a message: “Jenkins is going to shut down.”
+•	You’ll see a red banner at the top of the dashboard.
+•	New job triggers (manual, webhook, scheduled, etc.) will be blocked.
+•	Once all running jobs are finished, you can safely shut Jenkins down.
+
+
+Important  
+This will not accept the new jobs (new job will be in queue), currently running build it can run properly and not accepting new build. Jenkins will not shut down on its own until you are not shutting down.
+
+
+We will get this option on  Dashboard  manage Jenkins  similar page on manage Jenkins  prepare for shutdown option is there…
+
+
+
