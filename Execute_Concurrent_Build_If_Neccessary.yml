@@ -1,0 +1,65 @@
+
+
+
+Execute concurrent builds if necessary
+
+
+The main purpose of this concept is we can decide how many jobs can be run on a single node at a time..
+This setting is for only freestyle job and not applied for the pipeline jobs..
+( This is a setting in Jenkins Freestyle Jobs (not pipelines) that allows multiple builds of the same job to run in parallel — instead of queuing up one by one.)
+
+
+This multiple builds will be running on single node or also the multiple nodes..
+depending on the scenarios..... If one agent is free  then multiple builds can run on single node.... If multiple agent is free  then also multiple builds can run on multiple nodes.
+
+
+Where to Find It:
+•	Go to Job Configuration
+•	Check the option:
+✅ “Execute concurrent builds if necessary”
+
+
+
+By Default:
+Jenkins does NOT allow concurrent builds of the same job.
+If a job is running and triggered again, the new build waits in the queue until the previous one finishes.
+
+
+What Happens When This Option is Enabled?
+•	Jenkins will allow the same job to run multiple builds at the same time.
+•	Useful when builds are independent of each other and don't interfere (e.g., running tests for different branches or environments).
+
+
+
+Example Scenario
+Let’s say your job is named Run-Tests and it’s configured to build when:
+•	Code is pushed to GitHub
+•	A manual trigger is run
+
+
+Without Concurrent Builds:
+[Build #101] started
+[Build #102] triggered but queued
+[Build #103] triggered but queued
+#102 runs only after #101 finishes
+
+
+With "Execute Concurrent Builds if Necessary":
+[Build #101] started
+[Build #102] started immediately (in parallel)
+[Build #103] started immediately (in parallel)
+
+
+When NOT to Use It
+You should NOT enable this when:
+•	The job accesses shared resources (e.g., same file, DB, environment).
+•	The builds conflict (e.g., overwriting the same files or folders).
+•	The job was not designed to be thread-safe.
+
+
+When to Use It
+You should enable this if:
+•	The job is stateless or isolated.
+•	Jobs are working on different Git branches or test environments.
+•	You want to speed up build processing and avoid queue delays.
+
