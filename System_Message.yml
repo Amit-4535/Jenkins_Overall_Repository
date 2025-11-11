@@ -1,0 +1,31 @@
+
+
+System Message
+
+
+✅ Why Do We Use the System Message in Jenkins?
+
+The System Message in Jenkins is used to display an announcement or notice on the Jenkins dashboard — right at the top. This is helpful for communicating important information to all users who log in.
+
+📌 Common Use Cases for System Message:
+🔔 Purpose              	📝 Example
+🛠️ Maintenance Notice	        “Jenkins will be down for maintenance from 10 PM to 12 AM.”
+🚫 Build Restrictions	        “Do not trigger builds between 2 PM – 3 PM due to DB migration.”
+⚠️ Known Issues	                “New builds are failing due to network issues. Team is investigating.”
+📢 Upgrade Info	                “Jenkins upgraded to version 2.440. Please report any issues.”
+👥 Usage Guidelines	        “Do not run Docker-in-Docker jobs unless approved by DevOps team.”
+
+
+🔧 How to Set It?
+1.	From Jenkins Dashboard:
+o	Go to: Manage Jenkins → Configure System
+o	Scroll to System Message
+o	Enter your message (supports basic HTML for formatting)
+o	Save
+
+
+🧠 Why It Matters?
+•	Ensures clear communication with all Jenkins users.
+•	Prevents accidental usage during downtime.
+•	Acts as a dashboard bulletin board for the CI/CD team.
+
