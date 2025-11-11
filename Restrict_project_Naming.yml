@@ -1,0 +1,50 @@
+
+
+
+Restrict Project Naming
+
+
+
+🔐 What Is “Restrict Project Naming” in Jenkins?
+The Restrict project naming option is used to enforce a naming convention for all new jobs/projects created in Jenkins.
+When enabled, it uses a regular expression (regex) to define what names are allowed. If someone tries to create a project/job with a name that doesn’t match the regex, Jenkins will block it.
+
+
+🧭 Where to Find This Option:
+1.	Go to Jenkins Dashboard.
+2.	Click on Manage Jenkins.
+3.	Click Configure System.
+4.	Scroll to "Restrict project naming".
+5.	Enable the checkbox.
+6.	You’ll see a field to enter a Regular Expression and Description.
+
+
+
+🧪 How It Works:
+Field	                Description
+Name pattern (regex)	This is the pattern Jenkins uses to validate job names.
+Description	        (Optional) A message explaining the naming rules to users trying to create jobs.
+
+
+✅ Why Use It:
+•	Standardize naming (e.g., for folder automation or reporting).
+•	Avoid invalid or problematic job names.
+•	Security & organization in shared Jenkins environments.
+
+
+📌 Example Scenario:
+If you manage a Jenkins instance for multiple teams and want each team’s jobs to start with their team name (e.g., teamA-build, teamB-deploy), you could use:
+^team(A|B|C)-.*
+
+
+example --
+
+suppose i want to create every job which is started from the dev name then my expression should be --
+^dev.*$     (no space in this expression)
+
+i want to start every job with test name then the expression should be as below
+^test.*$      (no space allowd)
+
+
+like wise you can create the restrict project naming here in the jenkins..
+
