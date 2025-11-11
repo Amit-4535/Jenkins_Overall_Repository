@@ -1,0 +1,85 @@
+
+
+
+Global Tool Configurations
+
+
+What is "Global Tool Configuration" in Jenkins?
+
+The Global Tool Configuration section allows you to define tools that Jenkins jobs can use — such as:
+•	JDK
+•	Git
+•	Maven
+•	Gradle
+•	Docker CLI
+•	Node.js / npm
+•	Ansible
+•	Python
+
+These are preconfigured tool locations or auto-installation rules so Jenkins jobs can use them without manually configuring for each job.
+
+
+💡 Why Do We Need Global Tool Configuration in Jenkins?
+Global Tool Configuration allows Jenkins to manage and provide essential build tools (like Git, JDK, Maven, Docker, etc.) in a centralized and consistent way for all jobs.
+
+
+We will get global tool configuration here   Jenkins Dashboard → Manage Jenkins → Global Tool Configuration / (tools  -- might be the new enhancement)
+
+
+For this global tool configuration, I have installed git, ansible and docker on my ubuntu machine 
+	Git installation 
+ sudo apt update
+sudo apt install git -y
+git –version
+	Docker installation 
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+
+# Allow Jenkins to use Docker (optional but common)
+sudo usermod -aG docker Jenkins
+
+	Ansible installation 
+sudo apt install software-properties-common -y
+sudo add-apt-repository --yes --update ppa:ansible/ansible
+sudo apt install ansible -y
+ansible –version
+
+now restart the Jenkins..   sudo systemctl restart Jenkins
+
+Note  you can see the installed path of your software by using the command 
+which git
+which docker
+which ansible
+
+
+	Now go the mange Jenkins  global tool configuration or tools option  
+🔹 1. Git
+•	Jenkins will often auto-detect Git.
+•	If not:
+o	Click Add Git
+o	Name: git
+o	Path: /usr/bin/git
+
+
+🔹 2. Docker
+You need Docker Pipeline plugin installed first.
+•	Click Add Docker
+•	Name: docker
+•	Path to executable: /usr/bin/docker
+
+This is how we can use the global tool configurations in jenkins..
+
+
+
+Other notes 
+
+
+1. Consistent Builds Across Multiple Jobs
+Imagine your company has 30+ Jenkins jobs building Java apps.
+•	Instead of installing JDK/Maven manually on every Jenkins agent or hardcoding paths in every job…
+•	You define JDK and Maven versions globally once in Jenkins → Manage Jenkins → Global Tool Configuration.
+Result:
+Every job automatically picks the correct JDK/Maven version — no confusion or mismatch, and easier to upgrade in the future.
+
+
