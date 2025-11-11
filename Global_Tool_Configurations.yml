@@ -23,7 +23,10 @@ These are preconfigured tool locations or auto-installation rules so Jenkins job
 Global Tool Configuration allows Jenkins to manage and provide essential build tools (like Git, JDK, Maven, Docker, etc.) in a centralized and consistent way for all jobs.
 
 
-We will get global tool configuration here   Jenkins Dashboard → Manage Jenkins → Global Tool Configuration / (tools  -- might be the new enhancement)
+We will get global tool configuration here 
+  Jenkins Dashboard → 
+Manage Jenkins → 
+Global Tool Configuration / (tools  -- might be the new enhancement)
 
 
 For this global tool configuration, I have installed git, ansible and docker on my ubuntu machine 
@@ -51,6 +54,8 @@ Note  you can see the installed path of your software by using the command �
 which git
 which docker
 which ansible
+
+you cot see this option in global tool configuration until you are not installing the plugin for that software.. so once you installed the plugin, then only you can see the installed tool here in the global tool configurations.
 
 
 	Now go the mange Jenkins  global tool configuration or tools option  
