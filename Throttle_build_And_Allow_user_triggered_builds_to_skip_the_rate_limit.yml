@@ -1,0 +1,51 @@
+
+
+Throttle Build in Jenkins
+
+
+If you select the Throttle build option -- then we need to define the number of builds needs to be run or allowed in the particular time..
+
+example -- suppose i have mentioned the 
+number of builds = 3
+
+and wanted to run these 3 builds in the minute, so every build can take almost 20 seconds.
+if you use the 3 builds and wanted to run these in one hour so every job will take 20 minute..
+if you select the 3 builds and wanted to run these in a day then almost 8 hours for a build like wise we can settle..
+
+
+we have below time periods to set.
+- seconds
+- minutes
+- hours
+- day
+- week 
+- month
+- year
+
+
+if you set 3 builds for the minute and let us say your build is taking more than 1 minute 2 build then, once 20 seconds will completed, then 2nd builld will be started.. like wise we can configure the throttle build option here..
+
+
+Is There a Standard Limit to Set in Throttle Builds?
+There is no fixed or universal "standard" limit — it depends entirely on your system capacity and use case. However, here are some practical guidelines:
+
+Scenario	                                                Recommended Limit
+Heavy resource jobs (e.g., integration tests, Docker builds)	Max 1–2 per node
+Medium resource jobs (e.g., unit tests, packaging)	        Max 2–4 per node
+Lightweight jobs (e.g., linting, static analysis)	        Max 5+ per node
+Shared test environment or database	                        Max 1 total across all nodes
+
+build should be triggered after the time period, so when this time (minute) complete then you should be able to run the build again, meanwhile this build will remain in the queue..
+
+
+
+Allow user triggered builds to skip the rate limit --
+
+Now we have set the throttle build option, so after one build completed, next job will not trigger until the time will finish, but the requirement is we want to manually trigger the build immediately, then this option  Allow user triggered builds to skip the rate limit is useful..
+
+Note  even if we set the throttle build still we can manually run the build immediately.. by using option  Allow user triggered builds to skip the rate limit..
+
+this option will not scheduling the build in the queue, this option help us to run the build immediately..
+
+
+
