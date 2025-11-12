@@ -1,0 +1,107 @@
+
+
+Upstream Jobs / downstream jobs/ chain job / linked jobs  (bidirectional configurations) 
+
+
+Here we are creating 3 jobs named as
+1)	Build-job
+2)	Test-job and
+3)	Deploy-job
+
+
+Now 1st build-job configuration is as follows  click new item  enter name as build-job  freestyle job  and okay  Scroll to Build → Add build step → Execute shell, then add:  and add command  echo "🛠️ Building the project..."
+Scroll to Post-build Actions → Add post-build action → Build other projects  In Projects to build, enter: test-job and then save the configurations..
+
+
+Now 2nd  job configurations  Click New Item → Enter test-job → Choose Freestyle project → Click OK.  Under Build → Execute shell, add:  echo "🧪 Running tests on the project..."  enter command  echo "🧪 Running tests on the project..."  Add Post-build Action → Build other projects, and enter: deploy-job and save..
+
+
+Now 3rd job configurations  Click New Item → Enter deploy-job → Choose Freestyle project → Click OK.  Under Build → Execute shell, add:  echo "🚀 Deploying the project..."  and save..
+
+
+Now  Go to build-job → Click Build Now  
+✔️ build-job will run
+✔️ then test-job will be triggered
+✔️ then deploy-job will run
+
+
+This is how we are setting up the upstream jobs inside the Jenkins…
+
+
+Downstream jobs 
+
+🎯 Where is "Projects to Watch" used in Jenkins?
+➡️ It's part of the Build Triggers section, specifically when you configure a downstream job to get triggered after another job completes.
+
+
+🧩 It appears in:
+🛠 Freestyle Projects → Configure → Build Triggers → Build after other projects are built
+
+
+🧠 What does "Projects to Watch" mean?
+It tells Jenkins:
+"Only trigger this job if these specific upstream jobs run and complete."
+You specify the name(s) of the upstream jobs here.
+
+
+Lab for upstream and downstream jobs 
+
+Now we have 3 jobs 
+Build-job
+Test-job and
+Deploy-job
+
+
+🔧 Step 1: build-job – Set only Downstream
+1.	Go to Jenkins dashboard → build-job → Configure
+2.	Scroll to Post-build Actions
+3.	Click Add post-build action → Build other projects
+4.	Enter:  test-job name here
+
+This sets test-job as downstream of build-job
+
+
+🔧 Step 2: test-job – Set Both Upstream and Downstream
+1.	Go to test-job → Configure
+2.	Scroll to Build Triggers
+3.	✅ Check "Build after other projects are built"
+4.	In Projects to watch, enter: build-job here
+5.	Scroll to Post-build Actions → Add post-build action → Build other projects
+6.	Enter : deploy-job
+
+✅ This makes test-job:
+•	Downstream of build-job
+•	Upstream of deploy-job
+Click Save
+
+
+🔧 Step 3: deploy-job – Set only Upstream
+1.	Go to deploy-job → Configure
+2.	Scroll to Build Triggers
+3.	✅ Check "Build after other projects are built"
+4.	In Projects to watch, enter: test-job here
+5.	This makes deploy-job a downstream job of test-job
+6.	Click Save
+
+
+
+🧪 Final Test: Trigger the Whole Chain
+1.	Go to build-job → Build Now
+2.	What will happen:
+o	build-job finishes → triggers test-job
+o	test-job recognizes build-job as upstream, runs
+o	test-job finishes → triggers deploy-job
+o	deploy-job recognizes test-job as upstream, runs
+🔁 All jobs are now linked forward and backward, and Jenkins clearly understands the dependency flow.
+
+
+
+🔄 What is Bi-directional Configuration in Jenkins?
+Bi-directional configuration means:
+Setting both upstream and downstream relationships explicitly, in each job involved in a Jenkins pipeline.
+In simple terms:
+•	The upstream job knows who comes after it (via Post-build actions → Build other projects).
+•	The downstream job knows who comes before it (via Build triggers → Build after other projects are built).
+
+Note  in simple term it is the configuration of both the upstream and downstream job projects..
+
