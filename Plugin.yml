@@ -1,0 +1,30 @@
+
+
+
+Plugin 
+
+
+Plugins add features to Jenkins — such as Git integration, pipelines, Docker, notifications, credentials management, and more.
+Jenkins comes with some default plugins, but most features (like GitHub integration or Docker) require plugins you need to install manually.
+
+
+-	Come to the manage Jenkins section
+-	available section
+-	Go to available plugin section  search the plugin by name and install it.. here I am installing some important plugin which might be useful in coming tasks..  (github integration,         ansible, docker, Kubernetes and required plugins)  and click on install..  restart the Jenkins
+-	We can installing the plugin through the available plugin section...
+
+
+-	Installed plugin  here you will get the installed plugin (that means whatever plugin you have installed those are available in this section)
+
+
+-	Updates  this option is provided by the Jenkins let say suppose any plugin is came to update that you can update here..  (if updates are available for the plugins those plugin will        be present here in this option, we can easily updates those plugins)
+
+
+-	Advanced setting  this option is also available here for deploying the new plugin.. manually..
+
+
+Note  you can add remove or disable the plugins…
+Note   Jenkins plugins are written in Java (sometimes Kotlin or Groovy), built with Maven, and packaged as .hpi or .jpi files.
+
+
+if you click on plugin  you will get the plugin details in detail
