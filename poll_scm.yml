@@ -1,0 +1,47 @@
+
+
+Poll SCM / Source Code Polling
+
+
+So poll scm means, whenever developer are pushing the code to the remote repository, then jenkins will start the job automatically..
+
+
+-	Now for the demonstration purpose of poll scm or source code polling scm operation  i have code is available in the github repository.. so I have created the repository called  
+jenkinsprojectrepository
+
+-	And added below files inside that repository
+1)	app.js  content  console.log("Hello, From Jenkins!");
+2)	package.json  content 
+{
+  "name": "jenkins-sample",
+  "version": "1.0.0",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  }
+}
+
+
+3)	README.md  the content is 
+
+# Jenkins Polling SCM Sample Project
+
+This is a simple Node.js app for Jenkins SCM polling demo.
+
+Note  These files I have created on the remote repository..
+
+
+Configurations 
+
+-	Created new project called  pollscmjob
+-	Under configure   selected source code management operation  and selected git
+-	Inside repository url  mentioned my repositories url  then branches to build option I used  default */master (this branch is present in the repository)
+-	Under the build trigger option  select poll scm  I have scheduled a job will run after modification of code then it will trigger within 5 minutes  and I have mentioned cron 
+        expression as below
+-	H/5 * * * *
+-	Then just save and apply the changes..
+-	Now do the changes in your app.js file  this will start your job automatically within a 5 minutes after changing the code..
+
+
+
+
