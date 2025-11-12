@@ -1,0 +1,55 @@
+
+
+Scheduling Projects
+
+
+🔄 What is the Schedule Project option in Jenkins?
+The Schedule Project option lets you automate when your Jenkins jobs run by defining a schedule (cron-style) so jobs trigger periodically or at specific times — without manual intervention.
+
+
+Why use Schedule Project?
+•	To run builds/tests regularly (e.g., nightly builds)
+•	To trigger deployments at off-hours (e.g., weekends or midnight)
+•	To poll SCM (Source Control Management) periodically for changes
+•	To automate repetitive tasks (backups, reports, etc.)
+
+You can schedule the project or your job as per the cron expression 
+
+
+Cron Syntax format (5 fields):
+MIN HOUR DOM MONTH DOW
+Field	Allowed Values	Meaning
+MIN	0-59	Minute
+HOUR	0-23	Hour (24-hour clock)
+DOM	1-31	Day of month
+MONTH	1-12 or JAN-DEC	Month
+DOW	0-7 or SUN-SAT (0 and 7 are Sunday)	Day of week
+
+
+Examples:
+Schedule Expression	Meaning
+H/15 * * * *	Every 15 minutes
+0 2 * * *	Every day at 2:00 AM
+0 0 * * 0	Every Sunday at midnight
+0 0 1 * *	At midnight on the 1st of every month
+@midnight	At midnight every day (shorthand)
+
+
+Note for this demonstration purpose I am doing some changes in my build or in project that are inside the  execute shell I am defining below things 
+echo "hello !!! this is my first jenkins job"
+whoami
+id
+echo "This file was created during build number $BUILD_NUMBER at $(date)" > index.html
+
+
+
+now let us do the configuration 
+
+-	Go to your project
+-	Go to the configure
+-	Come to the build trigger option
+-	Assign the cron schedule time  H/5 * * * * (I am running this job for every 5 minutes)
+-	Click save and apply now.. wait for 5 minutes.. 14.48 it the current time now  you will see the next build at 14:53  yes now the build is executed..
+
+this is how we are scheduling the project..
+
