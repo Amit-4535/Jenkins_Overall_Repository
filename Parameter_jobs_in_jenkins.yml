@@ -1,0 +1,249 @@
+
+
+
+Parameters jobs 
+
+
+				This option allows you to pass inputs to a Jenkins job when triggering it — these are called parameters.
+When enabled, it makes your job dynamic and reusable
+
+
+-	  Choose which environment to deploy to (dev, staging, prod)
+-	 Provide a Git branch name
+-	Select options from a dropdown
+-	Input file paths, version numbers, etc
+
+
+Where to Find It:
+1.	Go to Jenkins Job → Configure
+2.	Check ✅ “This project is parameterized”
+3.	Click “Add Parameter”
+4.	Choose from various parameter types (explained below)
+
+
+Types of Parameters
+Parameter Type	                  Description	                                       Example
+String Parameter	          Accepts a text input	                              branch_name = feature/login
+Boolean Parameter	          Checkbox (true/false)                               restart_server = true
+Choice Parameter	          Dropdown menu of options	                      environment = dev / stage / prod
+Password Parameter	          Hidden input field	                              api_key = ****
+File Parameter	                  Upload file when starting build	              .csv config or .zip deployment file
+Run Parameter	                  Select a build from another job	              Pick last successful build of Job-X
+Git Parameter (plugin required)	  Select a Git branch, tag, or revision	              feature/*, v1.0
+
+
+UI Experience:
+When you click “Build with Parameters” on Jenkins:
+•	Jenkins shows a web form with all the defined parameters
+•	You input values and click "Build"
+•	Jenkins passes those values into the build steps
+
+
+🧠 Pipeline Equivalent
+If you're using Declarative Pipelines, you'd define parameters like this:
+
+
+pipeline {
+  agent any
+  parameters {
+    string(name: 'VERSION', defaultValue: '1.0.0', description: 'Version to deploy')
+    choice(name: 'ENVIRONMENT', choices: ['dev', 'stage', 'prod'], description: 'Target environment')
+    booleanParam(name: 'RESTART', defaultValue: true, description: 'Restart server after deployment?')
+  }
+  stages {
+    stage('Deploy') {
+      steps {
+        echo "Deploying version ${params.VERSION} to ${params.ENVIRONMENT}"
+        echo "Restart required: ${params.RESTART}"
+      }
+    }
+  }
+}
+
+
+Why It’s Useful
+•	Reusable Jobs: One job can serve multiple branches/environments.
+•	Controlled Execution: Input exactly what the build should do.
+•	Manual Control: Useful for release jobs or ad-hoc operations.
+
+
+
+Freestyle job with parameter 
+			Step-by-Step:
+A. Create the Job
+1.	Go to Jenkins Dashboard → Click “New Item”
+2.	Enter a name (e.g., Deploy-Freestyle)
+3.	Select Freestyle Project
+4.	Click OK
+
+Enable Parameters
+1.	Scroll down and check ✅ “This project is parameterized”
+2.	Click “Add Parameter”, then choose:
+o	Choice Parameter → Name: ENVIRONMENT, Choices: dev, stage, prod
+o	String Parameter → Name: VERSION, Default Value: 1.0.0
+o	Boolean Parameter → Name: RESTART, Default: true
+
+Add Build Step
+•	Scroll to “Build” → “Add build step” → “Execute shell”
+•	Add this script:
+echo "Deploying version $VERSION to $ENVIRONMENT"
+if [ "$RESTART" = "true" ]; then
+  echo "Restarting server..."
+else
+  echo "Skipping server restart."
+Fi
+
+Save & Run
+1.	Click “Save”
+2.	Go to job → Click “Build with Parameters”
+3.	Fill values → Click “Build”
+4.	Observe output in Console Output
+
+
+Manual parameter job --
+
+LAB for the freestyle job and with parameters 
+
+Create one freestyle job name  deploy-freestyle
+
+Inside the configuration of this project  used this project is parameterized option and click on checkbox..
+
+Added below parameters 
+Choice parameter  name : ENVIRONMENT
+Values ->
+Dev
+Stage
+Prod
+
+String parameter 
+		Name: version
+		Value: v1.0.0
+Boolean parameter 
+		Name: RESTART
+		Set by default: yes
+And in build steps  selected execute shell and added below content 
+echo "Deploying version $VERSION to $ENVIRONMENT"
+if [ "$RESTART" = "true" ]; then
+  echo "Restarting server..."
+else
+  echo "Skipping server restart."
+fi
+
+
+
+Now when you finished with this setup  you will get one option available and that is 
+Build with parameter
+
+Note  first time just build the job normally, don’t use the parameter option.. cause this will throw an error.. so first build normally and then use build with parameter option..
+
+Now click on build with parameter option 
+
+
+You will see something like this  choose the values as per the requirement and then build the project 
+
+
+
+Now lab for the pipeline parameter 
+
+Create a New Pipeline Job
+•	Go to Jenkins Dashboard
+•	Click “New Item”
+•	Name it something like Deploy-Pipeline
+•	Select “Pipeline”
+•	Click OK
+
+Add the Declarative Pipeline Script
+Paste the following code in the Pipeline script section:
+
+pipeline {
+  agent any
+
+  parameters {
+    choice(
+      name: 'ENVIRONMENT',
+      choices: ['dev', 'stage', 'prod'],
+      description: 'Select deployment environment'
+    )
+    string(
+      name: 'VERSION',
+      defaultValue: '1.0.0',
+      description: 'Application version to deploy'
+    )
+    booleanParam(
+      name: 'RESTART',
+      defaultValue: true,
+      description: 'Restart server after deployment?'
+    )
+  }
+
+  stages {
+    stage('Input Summary') {
+      steps {
+        echo "Environment: ${params.ENVIRONMENT}"
+        echo "Version: ${params.VERSION}"
+        script {
+          if (params.RESTART) {
+            echo "Restarting server..."
+          } else {
+            echo "Skipping server restart."
+          }
+        }
+      }
+    }
+  }
+}
+
+Save and Build
+
+
+•	Click Save
+•	Then click “Build with Parameters”
+•	You’ll now see a form similar to the Freestyle job with:
+o	Dropdown for ENVIRONMENT
+o	Textbox for VERSION
+o	Checkbox for RESTART
+
+
+For automating we can do as well   when changes happen in any branch, then we should not need to run the build by manual way, this will run the build as per the trigger..
+
+pipeline {
+    agent any
+
+    triggers {
+        githubPush()          // Auto-trigger on GitHub push
+    }
+
+    parameters {
+        string(name: 'APP_VERSION', defaultValue: '1.0.0', description: 'Version')
+        booleanParam(name: 'RUN_TESTS', defaultValue: true, description: 'Run tests')
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Get branch name from webhook environment
+                script {
+                    def branch = env.GIT_BRANCH ?: env.BRANCH_NAME ?: 'master'
+                    echo "Building branch: ${branch}"
+                    checkout([$class: 'GitSCM', branches: [[name: branch]],
+                              userRemoteConfigs: [[url: 'https://github.com/Amit-4535/parameter_repository.git']]])
+                }
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building version: ${params.APP_VERSION}"
+            }
+        }
+
+        stage('Test') {
+            when { expression { params.RUN_TESTS } }
+            steps {
+                echo "Running tests..."
+            }
+        }
+    }
+}
+
+
