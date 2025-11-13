@@ -1,0 +1,149 @@
+
+
+
+User_Role_and_Permission
+
+
+
+This is essential for enterprise setups, where you must control who can do what in Jenkins.
+
+
+🧩 Jenkins Security Model Overview
+Component	Description
+Users	        Individual accounts for developers, admins, etc.
+Roles	        Logical permission sets like Admin, Dev, Viewer, etc.
+Groups	        Collections of users (useful in LDAP/SAML setups)
+Permissions	Fine-grained access control on jobs, views, nodes, etc.
+
+
+🧩 Step 2: Install the Role-Based Strategy Plugin
+•  Go to: Manage Jenkins → Manage Plugins
+•  Click Available → Search for: - Role-based Authorization Strategy
+✅ Install and Restart Jenkins
+
+
+
+✅ Step : Enable Jenkins Security
+1.	Go to: Manage Jenkins → Configure Global Security
+2.	✅ Enable: Jenkins own user database
+3.	Check: Allow users to sign up (optional for testing)
+4.	Under Authorization, select:
+🟢 Role-Based Strategy
+5.	Click Save
+
+
+👤 Step : Create Users
+1.	Go to: Manage Jenkins → Manage Users
+2.	Click Create User
+3.	Provide:
+o	Username
+o	Password
+o	Full name
+o	Email
+4.	Click Create User
+
+
+
+🧱 Step 4: Configure Roles & Permissions
+Go to: Manage Jenkins → Manage and Assign Roles → Manage Roles
+Define Role Types:
+•	Global roles: apply Jenkins-wide
+•	Project roles: apply to specific jobs
+•	Agent roles: for build nodes
+Example Roles:
+Role Name	  Permissions
+admin	All (✅   All checkboxes)
+developer	  Job create/build/configure, View builds
+viewer	          Only Job read/build view
+qa	          Build only jobs in QA folder
+
+
+✅ To Add a Role:
+1.	Under Global Roles, in Role to add box, type: developer
+2.	Click Add
+3.	✅ Grant permissions like:
+o	Overall → Read
+o	Job → Build, Job → Read, Job → Configure (optional)
+4.	Repeat for viewer, admin, etc.
+
+
+
+👥 Step 5: Assign Roles to Users
+Go to: Manage Jenkins → Manage and Assign Roles → Assign Roles
+For Global Roles:
+Username	admin	developer	viewer
+admin	        ✅
+dev1		          ✅
+qa1			                  ✅
+Save the configuration.
+
+
+
+📂 Step 6: Use Project-Based Roles (Optional but Powerful)
+1.	Go back to Manage Roles
+2.	Scroll to Project roles
+3.	Add roles like qa-job or dev-job
+o	Regex pattern: ^QA-.* or ^Dev-.*
+o	Give Job → Build and Job → Read
+Now:
+•	Any job named QA-LoginTest, etc. is accessible only by qa1
+
+
+
+🔒 Permission Types (Key Examples)
+Permission Area	Common Permissions
+Overall	Read, Administer
+Job	Create, Build, Configure, Delete, Read
+View	Read
+Run	Replay, Update
+Agent	Connect, Disconnect
+
+
+
+✅ Real-Time Use Case Example
+User	Role	        Access Example
+admin	Admin	        Full access
+dev1	Developer	Can create/edit only dev jobs
+qa1	QA Tester	Can only trigger builds in QA jobs
+viewer	Viewer	        Read-only access to all jobs
+
+
+✅ Summary
+What You Learned	Details
+🔐 User creation	Jenkins built-in user management
+🧑‍🤝‍🧑 Role strategy	Global, Project, Agent roles
+🎯 Permissions	Fine-grained control (build, config, view)
+📂 Job-specific access	Use regex/project roles
+🏢 Real-time application	Perfect for Dev, QA, Admin split
+
+
+
+🔍 1. What Are Global Roles?
+✅ Definition:
+Global roles apply Jenkins-wide. They define what a user can do across the entire Jenkins system — regardless of which job, folder, or agent they are using.
+📌 Examples of Global Permissions:
+•	Overall → Administer (full Jenkins control)
+•	Overall → Read (see Jenkins dashboard)
+•	Job → Create (create new jobs globally)
+•	View → Read (view Jenkins UI)
+
+
+🔍 2. What Are Item Roles (Project Roles)?
+✅ Definition:
+Item roles are specific to jobs/folders/items. They control access to particular jobs, based on a name or pattern (regex).
+📌 Examples of Item Permissions:
+•	Job → Read
+•	Job → Build
+•	Job → Configure
+•	Job → Delete
+
+
+
+🔄 Key Difference Summary
+Feature	Global Role	Item/Project Role
+📍 Scope	Entire Jenkins	Specific jobs/folders only
+⚙️ Purpose	High-level system permissions	Granular control of job access
+🔑 Controls	System-level actions, job creation	Build, configure, delete per job
+📌 Use Case	Admins, system-wide developers	Dev/QA teams with access to some jobs
+🧠 Example	admin, developer, viewer	qa-job, dev-job, test-only
+
